@@ -5,6 +5,7 @@ from pyairtable import Api, Base, Table
 from airtable_pack.operations.create_record import create_record
 from airtable_pack.operations.delete_record import delete_record
 from airtable_pack.operations.get_record import get_record
+from airtable_pack.operations.update_fields import update_fields
 from airtable_pack.operations.update_record import update_record
 
 
@@ -25,6 +26,9 @@ class Airtable:
 
     def delete_record(self, table: Table, filter_: dict) -> dict:
         return delete_record(table=table, filter_=filter_)
+
+    def update_fields(self, table: Table, filter_: dict, fields: dict) -> dict:
+        return update_fields(table=table, filter_=filter_, fields=fields)
 
     def update_record(self, table: Table, filter_: dict, update: dict):
         return update_record(table=table, filter_=filter_, update=update)

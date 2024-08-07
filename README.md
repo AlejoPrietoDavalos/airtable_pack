@@ -2,7 +2,7 @@
 
 - https://support.airtable.com/docs/taking-and-restoring-base-snapshots
 - https://support.airtable.com/docs/es/using-field-and-table-editing-permissions
-
+- https://airtable.com/developers/web/api/model/field-type
 
 ### Ideas.
 1. Desde Python se genera la estructura de las tarjetas.

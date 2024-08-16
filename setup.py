@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = "airtable_pack",
-    version = "0.0.4",
+    version = "0.0.5",
     author = "Andrea Soledad Guerra",
     packages = find_packages(),
     description = "Python wrapper for Airtable Pack.",

@@ -1,4 +1,4 @@
-from typing import List
+from typing import TypeVar, List
 
 from pyairtable import Api, Base, Table
 
@@ -8,6 +8,7 @@ from airtable_pack.operations.get_record import get_record
 from airtable_pack.operations.update_fields import update_fields
 from airtable_pack.operations.update_record import update_record
 
+T_Airtable = TypeVar("T_Airtable", bound="Airtable")
 
 class Airtable:
     def __init__(self, api_key: str, base_id: str):

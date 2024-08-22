@@ -14,9 +14,9 @@ class RestOrder(Model):
     url_payment = F.TextField("url_payment")
 
     class Meta:
-        base_id = os.getenv('BASE_ID_RESTEST')
+        base_id = os.getenv('RESTEST_AIRTABLE_BASE_ID')
         table_name = "orders"
-        api_key = os.getenv('AIRTABLE_TKN')
+        api_key = os.getenv('RESTEST_AIRTABLE_API_KEY')
 
     @classmethod
     def create_fields(cls):
@@ -50,6 +50,7 @@ class RestOrder(Model):
             table.create_field("apartment","singleLineText")
         except:
             pass
+
 
         try:
             table.create_field(

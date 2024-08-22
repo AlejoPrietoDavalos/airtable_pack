@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 
 class RestOrder(Model):
     phone = F.TextField("phone")
-    order_id = F.NumberField("order_id")
     name = F.TextField("name")
+    order_id = F.NumberField("order_id")
     address = F.TextField("address")
     number_address = F.NumberField("number_address")
     apartment = F.TextField("apartment") 
@@ -30,7 +30,6 @@ class RestOrder(Model):
         name_type_options: List[Tuple[str, str, Optional[dict]]] = [
             ("name", "singleLineText", None),
             ("order_id", "number", {"precision": 0}),
-            ("name", "singleLineText", None),
             ("address", "singleLineText", None),
             ("number_address", "number", {"precision": 0}),
             ("apartment", "singleLineText", None),

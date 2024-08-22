@@ -1,5 +1,11 @@
+from typing import List, Tuple, Optional
+import traceback
 import os
+import logging
+
 from pyairtable.orm import Model, fields as F
+
+logger = logging.getLogger(__name__)
 
 
 class RestOrder(Model):
@@ -21,61 +27,32 @@ class RestOrder(Model):
     @classmethod
     def create_fields(cls):
         table = cls.get_table()
-        try:
-            table.create_field("name", "singleLineText")
-        except:
-            pass
-
-        try:
-            table.create_field("order_id", "number", options= {"precision":0})
-        except:
-            pass  
-
-        try:  
-            table.create_field("name", "singleLineText")
-        except:
-            pass
-
-        try:
-            table.create_field("address", "singleLineText")
-        except:
-            pass
-            
-        try:
-            table.create_field("number_address", "number")
-        except:
-            pass
-
-        try:
-            table.create_field("apartment","singleLineText")
-        except:
-            pass
-
-
-        try:
-            table.create_field(
-                "status_payment",
-                "checkbox", 
-                options={"color": "greenBright", "icon": "xCheckbox"}
-            )
-        except:
-            pass
-
-        try:
-            table.create_field(
-                "status_delivery",
-                "multipleSelects",
-                options= {"choices": [
+        name_type_options: List[Tuple[str, str, Optional[dict]]] = [
+            ("name", "singleLineText", None),
+            ("order_id", "number", {"precision": 0}),
+            ("name", "singleLineText", None),
+            ("address", "singleLineText", None),
+            ("number_address", "number", {"precision": 0}),
+            ("apartment", "singleLineText", None),
+            ("status_payment", "checkbox", {"color": "greenBright", "icon": "xCheckbox"})
+        ]
+        name_type_options.append((
+            "status_delivery", "multipleSelects", {
+                "choices": [
                     {"name": "order_processing"},
-                    {"name":"underway"},
+                    {"name": "underway"},
                     {"name": "delivered"}
-                ]}
-            )
-        except:
-            pass
+                ]
+            }
+        ))
+        name_type_options.append(("url_payment", "url", None))
 
-        try:
-            table.create_field("url_payment", "url")
-        except:
-            pass
 
+        for field_name, field_type, options in name_type_options:
+            msg = f"--> field_name={field_name} | field_type={field_type}"
+            try:
+                table.create_field(field_name, field_type, options=options)
+                logger.info(msg)
+            except Exception as e:
+                logger.warning(f"{msg} | error={e}")
+                logger.warning(traceback.format_exc())
